@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="xdat_builder" default="jar" basedir=".">
+
+	<path id="classpath">
+		<fileset dir="libs/">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="init">
+		<delete dir="build"/>
+		<mkdir dir="build"/>
+		<delete file="xdat.jar"/>
+	</target>
+	
+	<target name="compile" depends="init">
+		<javac destdir="build" optimize="on" debug="on" source="1.8" target="1.8" encoding="UTF-8" includeantruntime="false" nowarn="off">
+			<compilerarg value="-Xlint:all">
+			</compilerarg>
+			<src path="java"/>
+			<classpath refid="classpath"/>
+		</javac>
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar destfile="xdat.jar" level="9">
+			<fileset dir="build"/>
+		</jar>
+		<delete dir="build"/>
+	</target>
+	
+</project>
